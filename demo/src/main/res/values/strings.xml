@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ExoMedia Demo</string>
+    <string name="title_activity_video_player">ExoMedia Video Player</string>
+    <string name="title_activity_audio_player">ExoMedia Audio Player</string>
+
+    <string name="title_audio_selection_activity">Audio selection</string>
+    <string name="title_video_selection_activity">Video selection</string>
+
+    <string name="default_video_time" translatable="false">00:00</string>
+    <string name="default_video_combined_time" translatable="false">00:00/00:00</string>
+    <string name="time_am">AM</string>
+    <string name="time_pm">PM</string>
+    <string name="battery_percent">battery:%1$d%%</string>
+    <string name="volume_changing">volume:%1$d%%</string>
+    <string name="brightness_changing">brightness:%1$d%%</string>
+</resources>

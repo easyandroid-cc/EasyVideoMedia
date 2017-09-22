@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@id/exomedia_controls_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/default_playback_background">
+
+        <TextView
+            android:id="@id/exomedia_controls_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableLeft="@mipmap/ic_arrow_back_white_36dp"
+            android:gravity="center_vertical|start"
+            android:lines="1"
+            android:paddingLeft="@dimen/video_view_controller_margin"
+            android:paddingRight="@dimen/common_zero_dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/centerContentWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <ProgressBar
+            android:id="@id/exomedia_controls_video_loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/centerInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/default_playback_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/video_view_center_info_txt_size"
+            android:visibility="gone" />
+
+    </FrameLayout>
+    <!--exomedia_controls_text_container-->
+    <!--exomedia_controls_interactive_container-->
+    <LinearLayout
+        android:id="@id/exomedia_controls_interactive_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/video_view_controller"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingEnd="@dimen/common_zero_dp"
+            android:paddingStart="@dimen/video_view_controller_margin" />
+
+        <ImageButton
+            android:id="@id/exomedia_controls_previous_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginRight="@dimen/exomedia_min_button_height"
+            android:background="@android:color/transparent"
+            android:minHeight="@dimen/exomedia_min_button_height"
+            android:minWidth="@dimen/exomedia_min_button_height"
+            android:src="@drawable/exomedia_ic_skip_previous_white"
+            android:visibility="gone" />
+
+
+        <ImageButton
+            android:id="@id/exomedia_controls_next_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/exomedia_min_button_height"
+            android:background="@android:color/transparent"
+            android:minHeight="@dimen/exomedia_min_button_height"
+            android:minWidth="@dimen/exomedia_min_button_height"
+            android:src="@drawable/exomedia_ic_skip_next_white"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@id/exomedia_controls_sub_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@id/exomedia_controls_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>
+

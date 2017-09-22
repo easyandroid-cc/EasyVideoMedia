@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="exomedia_controls_title" type="id" />
+    <item name="exomedia_controls_video_loading" type="id" />
+    <item name="exomedia_controls_text_container" type="id" />
+    <item name="exomedia_controls_previous_btn" type="id" />
+    <item name="exomedia_controls_next_btn" type="id" />
+    <item name="exomedia_controls_play_pause_btn" type="id" />
+    <item name="exomedia_controls_current_time" type="id" />
+    <item name="exomedia_controls_video_seek" type="id" />
+    <item name="exomedia_controls_end_time" type="id" />
+    <item name="exomedia_controls_extra_container" type="id" />
+    <item name="exomedia_controls_sub_title" type="id" />
+    <item name="exomedia_controls_description" type="id" />
+    <item name="exomedia_controls_interactive_container" type="id" />
+    <item name="easyListFilter_CustomViewConfirm_View3" type="id" />
+    <item name="more_clear" type="id" />
+</resources>

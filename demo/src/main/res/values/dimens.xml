@@ -1,0 +1,9 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="common_zero_dp">0dp</dimen>
+    <dimen name="default_video_view_time_text_size">15sp</dimen>
+    <dimen name="video_view_controller_margin">10dp</dimen>
+    <dimen name="video_view_center_info_txt_size">18sp</dimen>
+</resources>
