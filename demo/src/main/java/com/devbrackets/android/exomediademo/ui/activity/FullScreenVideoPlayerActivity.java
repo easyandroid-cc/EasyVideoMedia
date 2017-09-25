@@ -14,6 +14,7 @@ import com.devbrackets.android.exomedia.ui.widget.VideoView;
 
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
 import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
@@ -33,7 +34,6 @@ public class FullScreenVideoPlayerActivity extends VideoPlayerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUiFlags();
-        System.out.println("cgp onCreate");
         if (videoView.getVideoControls() != null) {
             videoView.getVideoControls().setVisibilityListener(new ControlsVisibilityListener());
         }
@@ -44,7 +44,6 @@ public class FullScreenVideoPlayerActivity extends VideoPlayerActivity {
     public void onDestroy() {
         super.onDestroy();
         exitFullscreen();
-        System.out.println("cgp onDestroy");
     }
 
     private void goFullscreen() {
@@ -103,17 +102,17 @@ public class FullScreenVideoPlayerActivity extends VideoPlayerActivity {
         int flags = SYSTEM_UI_FLAG_LOW_PROFILE;//| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            flags |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+            flags |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
 
         return flags;
     }
 
-    //这个状态会隐藏通知栏和nav 栏，适合在横屏使用，滑动通知栏都会出现
+    //这个状态会隐藏通知栏和nav 栏，适合在横屏使用，滑动通知栏都会出现,点击屏幕不会唤醒其他控件
     int updateNavVisibility() {
         int newVis = SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -125,6 +124,14 @@ public class FullScreenVideoPlayerActivity extends VideoPlayerActivity {
         return newVis;
     }
 
+
+
+
+    public void xxx(){
+        int newVis=1;
+          newVis |= SYSTEM_UI_FLAG_LOW_PROFILE | SYSTEM_UI_FLAG_FULLSCREEN
+                | SYSTEM_UI_FLAG_HIDE_NAVIGATION | SYSTEM_UI_FLAG_IMMERSIVE;
+    }
     @Override
     public void onBackPressed() {
         System.out.println("isLandscape()=" + isLandscape());

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/centerContentWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ProgressBar
+        android:id="@id/exomedia_controls_video_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/centerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/default_playback_background"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/video_view_center_info_txt_size"
+        android:visibility="gone" />
+
+</FrameLayout>
+

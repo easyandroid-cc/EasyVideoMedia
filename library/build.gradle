@@ -16,7 +16,7 @@ ext {
 
 dependencies {
     // Android
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
 //    compile 'com.android.support:support-annotations:25.4.0'
 
     // ExoPlayer
