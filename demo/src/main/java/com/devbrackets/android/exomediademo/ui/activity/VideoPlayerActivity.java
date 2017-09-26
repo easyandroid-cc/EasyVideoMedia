@@ -35,14 +35,11 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.video_player_activity);
-
         retrieveExtras();
         init();
+
     }
 
     @Override
@@ -145,7 +142,8 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
             mediaItems.add(mediaItem);
         }
 
-        playlistManager.setAllowedMediaType(BasePlaylistManager.AUDIO | BasePlaylistManager.VIDEO);
+        playlistManager.setAllowedMediaType( BasePlaylistManager.VIDEO);
+//        playlistManager.setAllowedMediaType(BasePlaylistManager.AUDIO | BasePlaylistManager.VIDEO);
         playlistManager.setParameters(mediaItems, selectedIndex);
         playlistManager.setId(PLAYLIST_ID);
     }

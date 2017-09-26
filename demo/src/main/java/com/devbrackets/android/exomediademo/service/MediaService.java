@@ -23,6 +23,7 @@ import com.devbrackets.android.exomediademo.playlist.VideoApi;
 import com.devbrackets.android.exomediademo.ui.activity.StartupActivity;
 import com.devbrackets.android.playlistcore.api.AudioPlayerApi;
 import com.devbrackets.android.playlistcore.service.BasePlaylistService;
+
 /**
  * A simple service that extends {@link BasePlaylistService} in order to provide
  * the application specific information required.
@@ -75,8 +76,13 @@ public class MediaService extends BasePlaylistService<MediaItem, PlaylistManager
         return App.getPlaylistManager();
     }
 
+    public void setupAsForeground(){//控制是否显示通知
+
+    }
+
     @NonNull
     @Override
+
     protected PendingIntent getNotificationClickPendingIntent() {
         Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
         return PendingIntent.getActivity(getApplicationContext(), FOREGROUND_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);

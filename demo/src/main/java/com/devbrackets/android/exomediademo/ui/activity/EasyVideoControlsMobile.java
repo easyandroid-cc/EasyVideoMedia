@@ -17,13 +17,13 @@
 package com.devbrackets.android.exomediademo.ui.activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.devbrackets.android.exomedia.ui.widget.VideoControlsMobile;
-import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.devbrackets.android.exomedia.util.TimeFormatUtil;
 import com.devbrackets.android.exomediademo.R;
 
@@ -48,18 +48,20 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
     }
 
     @Override
-    protected void setup(Context context) {
+    protected void setup(final Context context) {
         super.setup(context);
         videoController = (VideoController) findViewById(R.id.videoController);
         videoController.setVideoControls(this);
-        videoController.setOnSeekBarChangeListener(new EasyVideoControlsMobile.VideoControllerChanged());
+        videoController.setOnSeekBarChangeListener(new VideoControllerChangedListener());
+        titleTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = (Activity) context;
+                activity.onBackPressed();
+            }
+        });
     }
 
-    @Override
-    public void setVideoView(@Nullable VideoView videoView) {
-        super.setVideoView(videoView);
-//        videoController.setVideoView(videoView);
-    }
 
     public long getCurrentPosition() {
         return videoView.getCurrentPosition();
@@ -74,14 +76,10 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
         return com.devbrackets.android.exomediademo.R.layout.exo_playback_control_view;
     }
 
-    protected class VideoControllerChanged {
+    protected class VideoControllerChangedListener {
         private long seekToTime;
 
         public void onProgressChanged(int progress) {
-//            if (!fromUser) {
-//                return;
-//            }
-
             seekToTime = progress;
             if (currentTimeTextView != null) {
                 currentTimeTextView.setText(TimeFormatUtil.formatMs(seekToTime));
