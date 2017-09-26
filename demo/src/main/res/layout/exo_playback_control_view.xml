@@ -3,26 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@id/exomedia_controls_text_container"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/default_playback_background">
-
-        <TextView
-            android:id="@id/exomedia_controls_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableLeft="@mipmap/ic_arrow_back_white_36dp"
-            android:gravity="center_vertical|start"
-            android:lines="1"
-            android:paddingLeft="@dimen/video_view_controller_margin"
-            android:paddingRight="@dimen/common_zero_dp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
 
     <com.devbrackets.android.exomediademo.ui.activity.VideoController
         android:id="@+id/videoController"
@@ -83,5 +63,25 @@
             android:visibility="gone" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@id/exomedia_controls_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/default_playback_background">
+
+        <TextView
+            android:id="@id/exomedia_controls_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableLeft="@mipmap/ic_arrow_back_white_36dp"
+            android:gravity="center_vertical|start"
+            android:lines="1"
+            android:paddingLeft="@dimen/video_view_controller_margin"
+            android:paddingRight="@dimen/common_zero_dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 </RelativeLayout>
 
