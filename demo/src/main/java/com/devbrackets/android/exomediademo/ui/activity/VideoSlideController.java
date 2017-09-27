@@ -33,7 +33,7 @@ import com.devbrackets.android.exomediademo.R;
 /**
  * 音量和屏幕亮度的控制器
  */
-public class VideoController extends FrameLayout implements View.OnTouchListener {
+public class VideoSlideController extends FrameLayout implements View.OnTouchListener {
     private FrameLayout centerContentWrapper;
     private TextView centerInfo;
 
@@ -66,23 +66,23 @@ public class VideoController extends FrameLayout implements View.OnTouchListener
         this.videoControls = videoControls;
     }
 
-    public VideoController(@NonNull Context context) {
+    public VideoSlideController(@NonNull Context context) {
         super(context);
         setup(context);
     }
 
-    public VideoController(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public VideoSlideController(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setup(context);
     }
 
-    public VideoController(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public VideoSlideController(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setup(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public VideoController(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+    public VideoSlideController(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setup(context);
     }
@@ -199,10 +199,10 @@ public class VideoController extends FrameLayout implements View.OnTouchListener
     private class PlayerGestureListener extends GestureDetector.SimpleOnGestureListener {
         private boolean firstTouch;
         private boolean volumeControl;
-        private VideoController videoController;
+        private VideoSlideController videoSlideController;
 
-        public PlayerGestureListener(VideoController videoController) {
-            this.videoController = videoController;
+        public PlayerGestureListener(VideoSlideController videoSlideController) {
+            this.videoSlideController = videoSlideController;
         }
 
         @Override
@@ -223,14 +223,14 @@ public class VideoController extends FrameLayout implements View.OnTouchListener
             float deltaY = mOldY - e2.getY();
             float deltaX = mOldX - e2.getX();
             if (firstTouch) {
-                videoController.setToSeek(Math.abs(distanceX) >= Math.abs(distanceY));//是否是快进
+                videoSlideController.setToSeek(Math.abs(distanceX) >= Math.abs(distanceY));//是否是快进
                 volumeControl = mOldX > mSurfaceYDisplayRange * 0.5f;
                 firstTouch = false;
-                if (videoController.isToSeek()) {
+                if (videoSlideController.isToSeek()) {
                     videoControllerChangedListener.onStartTrackingTouch();
                 }
             }
-            if (videoController.isToSeek()) {
+            if (videoSlideController.isToSeek()) {
                 deltaX = -deltaX;
                 long position = videoControls.getCurrentPosition();
                 long duration = videoControls.getDuration();

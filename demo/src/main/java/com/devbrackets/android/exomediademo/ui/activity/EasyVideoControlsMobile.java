@@ -26,9 +26,12 @@ import android.view.View;
 import com.devbrackets.android.exomedia.ui.widget.VideoControlsMobile;
 import com.devbrackets.android.exomedia.util.TimeFormatUtil;
 import com.devbrackets.android.exomediademo.R;
+import com.devbrackets.android.exomediademo.ui.activity.view.VideoPlayController;
 
 public class EasyVideoControlsMobile extends VideoControlsMobile {
-    VideoController videoController;
+    VideoSlideController videoSlideController;
+    VideoPlayController videoPlayController;//播放 错误 重播
+
 
     public EasyVideoControlsMobile(Context context) {
         super(context);
@@ -50,9 +53,10 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
     @Override
     protected void setup(final Context context) {
         super.setup(context);
-        videoController = (VideoController) findViewById(R.id.videoController);
-        videoController.setVideoControls(this);
-        videoController.setOnSeekBarChangeListener(new VideoControllerChangedListener());
+        videoSlideController = (VideoSlideController) findViewById(R.id.videoController);
+        videoPlayController = (VideoPlayController) findViewById(R.id.videoPlayController);
+        videoSlideController.setVideoControls(this);
+        videoSlideController.setOnSeekBarChangeListener(new VideoControllerChangedListener());
         titleTextView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +64,52 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
                 activity.onBackPressed();
             }
         });
+        videoPlayController.setOnPlayButtonClickListener(new VideoPlayController.OnPlayButtonClickListener() {
+            @Override
+            public void onStartClick() {
+                onPlayPauseClick();
+            }
+
+            @Override
+            public void onRestartClick() {
+//                if (videoView != null) {
+//                    videoView.restart();
+//                }
+                onPlayPauseClick();
+            }
+
+            @Override
+            public void onErrorClick() {
+
+            }
+        });
     }
 
+    @Override
+    protected void onPlayPauseClick() {
+        super.onPlayPauseClick();
+//        if (videoView.getCurrentPosition() >= videoView.getDuration()) {
+//            videoView.restartOverridePosition();
+//        }
+
+    }
+
+    public void showStartView() {
+        videoPlayController.showStartView();
+    }
+
+    public void showErrorView() {
+        videoPlayController.showErrorView();
+    }
+
+    public void showRestartView() {
+//        onc
+        videoPlayController.showRestartView();
+    }
+
+    public void hideAllView() {
+        videoPlayController.hideAllView();
+    }
 
     public long getCurrentPosition() {
         return videoView.getCurrentPosition();

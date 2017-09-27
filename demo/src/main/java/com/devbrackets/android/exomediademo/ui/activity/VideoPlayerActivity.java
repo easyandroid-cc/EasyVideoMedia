@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import com.devbrackets.android.exomedia.listener.OnCompletionListener;
+import com.devbrackets.android.exomedia.listener.OnErrorListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.devbrackets.android.exomediademo.App;
 import com.devbrackets.android.exomediademo.R;
@@ -88,12 +90,20 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
     @Override
     public boolean onPlaybackStateChanged(@NonNull PlaylistServiceCore.PlaybackState playbackState) {
         if (playbackState == PlaylistServiceCore.PlaybackState.STOPPED) {
-            finish();
-            return true;
+//            playlistManager.play(0, true);
+//            easyVideoControlsMobile.showRestartView();
+//            return true;
         } else if (playbackState == PlaylistServiceCore.PlaybackState.ERROR) {
-            showErrorMessage();
+//            showErrorMessage();
+//            easyVideoControlsMobile.   onPreviousClick();
+//            easyVideoControlsMobile.showErrorView();
+        }else if(playbackState == PlaylistServiceCore.PlaybackState.PLAYING){
+            easyVideoControlsMobile.hideAllView();
+        }else if(playbackState == PlaylistServiceCore.PlaybackState.PAUSED){
+            easyVideoControlsMobile.showStartView();
         }
 
+        System.out.println("cgp playbackState= " + playbackState);
         return false;
     }
 
@@ -106,15 +116,45 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
         selectedIndex = extras.getInt(EXTRA_INDEX, 0);
     }
 
+    EasyVideoControlsMobile easyVideoControlsMobile;
+
     protected void init() {
         setupPlaylistManager();
-
         videoView = (VideoView) findViewById(R.id.video_play_activity_video_view);
+        easyVideoControlsMobile = new EasyVideoControlsMobile(videoView.getContext());
         content = findViewById(R.id.content);
-        videoView.setControls(new EasyVideoControlsMobile(videoView.getContext()));
+        videoView.setControls(easyVideoControlsMobile);
         playlistManager.setVideoPlayer(new VideoApi(videoView));
-        playlistManager.play(0, false);
+        playlistManager.play(0, true);
+//        easyVideoControlsMobile.showStartView();
+//        videoView.setMeasureBasedOnAspectRatioEnabled();
+//        videoView.set
+        videoView.isPlaying();
+        videoView.setOnCompletionListener(new OnCompletionListener() {
+            @Override
+            public void onCompletion() {
+//                isCompletion=true;
+//                videoView.reset();
+//                videoView.restart();
+//                videoView.pause();
+//                videoView.release();
+//                videoView.getVideoControls().hide();
+//                videoView.seekTo(0);
+//                videoView.getVideoControls().finishLoading();
+                playlistManager.play(0, true);
+
+            }
+        });
+        videoView.setOnErrorListener(new OnErrorListener() {
+            @Override
+            public boolean onError(Exception e) {
+                easyVideoControlsMobile.showErrorView();
+                return false;
+            }
+        });
+        videoView.setPreviewImage(R.mipmap.ic_launcher);
     }
+//    boolean isCompletion=false;
 
     protected void showErrorMessage() {
         new AlertDialog.Builder(this)
@@ -142,7 +182,7 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
             mediaItems.add(mediaItem);
         }
 
-        playlistManager.setAllowedMediaType( BasePlaylistManager.VIDEO);
+        playlistManager.setAllowedMediaType(BasePlaylistManager.VIDEO);
 //        playlistManager.setAllowedMediaType(BasePlaylistManager.AUDIO | BasePlaylistManager.VIDEO);
         playlistManager.setParameters(mediaItems, selectedIndex);
         playlistManager.setId(PLAYLIST_ID);
