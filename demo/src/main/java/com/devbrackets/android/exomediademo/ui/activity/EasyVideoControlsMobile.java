@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2016 Brian Wernick
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.devbrackets.android.exomediademo.ui.activity;
 
 import android.annotation.TargetApi;
@@ -27,11 +11,13 @@ import com.devbrackets.android.exomedia.ui.widget.VideoControlsMobile;
 import com.devbrackets.android.exomedia.util.TimeFormatUtil;
 import com.devbrackets.android.exomediademo.R;
 import com.devbrackets.android.exomediademo.ui.activity.view.VideoPlayController;
+import com.devbrackets.android.exomediademo.ui.activity.view.VideoSlideController;
 
 public class EasyVideoControlsMobile extends VideoControlsMobile {
-    VideoSlideController videoSlideController;
-    VideoPlayController videoPlayController;//播放 错误 重播
 
+    VideoSlideController videoSlideController;
+
+    VideoPlayController videoPlayController;//播放 错误 重播
 
     public EasyVideoControlsMobile(Context context) {
         super(context);
@@ -72,26 +58,20 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
 
             @Override
             public void onRestartClick() {
-//                if (videoView != null) {
-//                    videoView.restart();
-//                }
-                onPlayPauseClick();
+                if (videoView != null) {
+                    videoView.restart();
+                }
+                hideAllView();
             }
 
             @Override
             public void onErrorClick() {
-
+                if (videoView != null) {
+                    videoView.restart();
+                }
+                hideAllView();
             }
         });
-    }
-
-    @Override
-    protected void onPlayPauseClick() {
-        super.onPlayPauseClick();
-//        if (videoView.getCurrentPosition() >= videoView.getDuration()) {
-//            videoView.restartOverridePosition();
-//        }
-
     }
 
     public void showStartView() {
@@ -99,15 +79,24 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
     }
 
     public void showErrorView() {
+        loadingProgressBar.setVisibility(View.GONE);
+        seekBar.setEnabled(false);
+        seekBar.setVisibility(View.INVISIBLE);
+        playPauseButton.setEnabled(false);
         videoPlayController.showErrorView();
     }
 
     public void showRestartView() {
-//        onc
+        seekBar.setEnabled(false);
+        seekBar.setVisibility(View.INVISIBLE);
+        playPauseButton.setEnabled(false);
         videoPlayController.showRestartView();
     }
 
     public void hideAllView() {
+        seekBar.setEnabled(true);
+        seekBar.setVisibility(View.VISIBLE);
+        playPauseButton.setEnabled(true);
         videoPlayController.hideAllView();
     }
 
@@ -124,7 +113,7 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
         return com.devbrackets.android.exomediademo.R.layout.exo_playback_control_view;
     }
 
-    protected class VideoControllerChangedListener {
+    public class VideoControllerChangedListener {
         private long seekToTime;
 
         public void onProgressChanged(int progress) {

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <com.devbrackets.android.exomediademo.ui.activity.VideoSlideController
+    <com.devbrackets.android.exomediademo.ui.activity.view.VideoSlideController
         android:id="@+id/videoController"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

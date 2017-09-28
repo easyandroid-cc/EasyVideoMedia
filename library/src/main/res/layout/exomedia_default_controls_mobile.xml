@@ -119,7 +119,7 @@
                 android:minHeight="@dimen/exomedia_min_button_height"
                 android:minWidth="@dimen/exomedia_min_button_height"
                 android:visibility="gone"
-                app:srcCompat="@drawable/exomedia_ic_skip_previous_white"
+                android:src="@drawable/exomedia_ic_skip_previous_white"
                 tools:ignore="ContentDescription,RtlHardcoded"
                 tools:visibility="visible"/>
 
@@ -130,7 +130,7 @@
                 android:background="@android:color/transparent"
                 android:minHeight="@dimen/exomedia_min_button_height"
                 android:minWidth="@dimen/exomedia_min_button_height"
-                app:srcCompat="@drawable/exomedia_ic_play_arrow_white"
+                android:src="@drawable/exomedia_ic_play_arrow_white"
                 tools:ignore="ContentDescription"/>
 
             <ImageButton
@@ -142,7 +142,7 @@
                 android:minHeight="@dimen/exomedia_min_button_height"
                 android:minWidth="@dimen/exomedia_min_button_height"
                 android:visibility="gone"
-                app:srcCompat="@drawable/exomedia_ic_skip_next_white"
+                android:src="@drawable/exomedia_ic_skip_next_white"
                 tools:ignore="ContentDescription,RtlHardcoded"
                 tools:visibility="visible"/>
         </LinearLayout>

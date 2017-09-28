@@ -1,4 +1,4 @@
-package com.devbrackets.android.exomediademo.ui.activity;
+package com.devbrackets.android.exomediademo.ui.activity.view;
 
 import android.app.Activity;
 import android.content.Context;

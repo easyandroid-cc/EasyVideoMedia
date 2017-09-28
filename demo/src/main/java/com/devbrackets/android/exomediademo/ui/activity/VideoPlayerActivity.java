@@ -1,14 +1,13 @@
 package com.devbrackets.android.exomediademo.ui.activity;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnErrorListener;
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.devbrackets.android.exomediademo.App;
 import com.devbrackets.android.exomediademo.R;
@@ -80,6 +79,7 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
     protected void onDestroy() {
         super.onDestroy();
         playlistManager.invokeStop();
+        videoView.release();
     }
 
     @Override
@@ -97,15 +97,20 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
 //            showErrorMessage();
 //            easyVideoControlsMobile.   onPreviousClick();
 //            easyVideoControlsMobile.showErrorView();
-        }else if(playbackState == PlaylistServiceCore.PlaybackState.PLAYING){
+        } else if (playbackState == PlaylistServiceCore.PlaybackState.PLAYING) {
             easyVideoControlsMobile.hideAllView();
-        }else if(playbackState == PlaylistServiceCore.PlaybackState.PAUSED){
-            easyVideoControlsMobile.showStartView();
+        } else if (playbackState == PlaylistServiceCore.PlaybackState.PAUSED) {
+//            if (isCompletion) {
+//                easyVideoControlsMobile.hideAllView();
+//                isCompletion = false;
+//            }
+//            easyVideoControlsMobile.showStartView();
         }
 
         System.out.println("cgp playbackState= " + playbackState);
         return false;
     }
+
 
     /**
      * Retrieves the extra associated with the selected playlist index
@@ -126,47 +131,36 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
         videoView.setControls(easyVideoControlsMobile);
         playlistManager.setVideoPlayer(new VideoApi(videoView));
         playlistManager.play(0, true);
-//        easyVideoControlsMobile.showStartView();
+
 //        videoView.setMeasureBasedOnAspectRatioEnabled();
 //        videoView.set
         videoView.isPlaying();
         videoView.setOnCompletionListener(new OnCompletionListener() {
             @Override
             public void onCompletion() {
-//                isCompletion=true;
-//                videoView.reset();
-//                videoView.restart();
-//                videoView.pause();
-//                videoView.release();
-//                videoView.getVideoControls().hide();
-//                videoView.seekTo(0);
-//                videoView.getVideoControls().finishLoading();
-                playlistManager.play(0, true);
-
+                easyVideoControlsMobile.showRestartView();
             }
         });
+
         videoView.setOnErrorListener(new OnErrorListener() {
             @Override
             public boolean onError(Exception e) {
                 easyVideoControlsMobile.showErrorView();
-                return false;
+//                easyVideoControlsMobile.finishLoading();
+                return true;
+            }
+        });
+        videoView.setReleaseOnDetachFromWindow(true);
+        videoView.setKeepScreenOn(true);
+        videoView.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                if (!videoView.isPlaying()) {
+                    easyVideoControlsMobile.showStartView();
+                }
             }
         });
         videoView.setPreviewImage(R.mipmap.ic_launcher);
-    }
-//    boolean isCompletion=false;
-
-    protected void showErrorMessage() {
-        new AlertDialog.Builder(this)
-                .setTitle("Playback Error")
-                .setMessage(String.format("There was an error playing \"%s\"", playlistManager.getCurrentItem().getTitle()))
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                })
-                .show();
     }
 
     /**

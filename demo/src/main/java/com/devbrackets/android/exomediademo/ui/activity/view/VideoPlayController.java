@@ -52,7 +52,7 @@ public class VideoPlayController extends FrameLayout {
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onStartClick();
-                    hideAllView();
+//                    hideAllView();
                 }
             }
         });
@@ -61,7 +61,7 @@ public class VideoPlayController extends FrameLayout {
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onRestartClick();
-                    hideAllView();
+//                    hideAllView();
                 }
             }
         });
@@ -70,7 +70,7 @@ public class VideoPlayController extends FrameLayout {
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onErrorClick();
-                    hideAllView();
+//                    hideAllView();
                 }
             }
         });
@@ -80,6 +80,10 @@ public class VideoPlayController extends FrameLayout {
         startView.setVisibility(View.VISIBLE);
         restartView.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
+    }
+
+    public boolean isShowRestartView() {
+        return restartView.getVisibility() == View.VISIBLE;
     }
 
     public void showRestartView() {

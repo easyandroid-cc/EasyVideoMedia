@@ -1,4 +1,4 @@
-package com.devbrackets.android.exomediademo.ui.activity;
+package com.devbrackets.android.exomediademo.ui.activity.view;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.devbrackets.android.exomedia.util.TimeFormatUtil;
 import com.devbrackets.android.exomediademo.R;
+import com.devbrackets.android.exomediademo.ui.activity.EasyVideoControlsMobile;
 
 /**
  * 音量和屏幕亮度的控制器
@@ -234,7 +235,7 @@ public class VideoSlideController extends FrameLayout implements View.OnTouchLis
                 deltaX = -deltaX;
                 long position = videoControls.getCurrentPosition();
                 long duration = videoControls.getDuration();
-                long newPosition = Math.max(0, Math.min((int) (position + deltaX * duration / mSurfaceYDisplayRange), duration));
+                long newPosition = Math.max(0, Math.min((int) (position + deltaX * duration / (3 * mSurfaceYDisplayRange)), duration));
                 if (newPosition >= 0) {
                     if (videoControls != null) {
                         videoControllerChangedListener.onProgressChanged((int) newPosition);

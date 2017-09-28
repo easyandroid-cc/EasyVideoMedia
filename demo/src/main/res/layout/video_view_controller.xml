@@ -48,7 +48,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_video_view_time_text_size" />
 
-    <com.devbrackets.android.exomediademo.ui.activity.HorizontalPortraitSwitchingButton
+    <com.devbrackets.android.exomediademo.ui.activity.view.HorizontalPortraitSwitchingButton
         android:id="@+id/horizontal_portrait_switching"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
