@@ -90,24 +90,10 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
     @Override
     public boolean onPlaybackStateChanged(@NonNull PlaylistServiceCore.PlaybackState playbackState) {
         if (playbackState == PlaylistServiceCore.PlaybackState.STOPPED) {
-//            playlistManager.play(0, true);
-//            easyVideoControlsMobile.showRestartView();
-//            return true;
         } else if (playbackState == PlaylistServiceCore.PlaybackState.ERROR) {
-//            showErrorMessage();
-//            easyVideoControlsMobile.   onPreviousClick();
-//            easyVideoControlsMobile.showErrorView();
         } else if (playbackState == PlaylistServiceCore.PlaybackState.PLAYING) {
-            easyVideoControlsMobile.hideAllView();
         } else if (playbackState == PlaylistServiceCore.PlaybackState.PAUSED) {
-//            if (isCompletion) {
-//                easyVideoControlsMobile.hideAllView();
-//                isCompletion = false;
-//            }
-//            easyVideoControlsMobile.showStartView();
         }
-
-        System.out.println("cgp playbackState= " + playbackState);
         return false;
     }
 
@@ -130,28 +116,20 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
         content = findViewById(R.id.content);
         videoView.setControls(easyVideoControlsMobile);
         playlistManager.setVideoPlayer(new VideoApi(videoView));
-        playlistManager.play(0, true);
 
-//        videoView.setMeasureBasedOnAspectRatioEnabled();
-//        videoView.set
-        videoView.isPlaying();
         videoView.setOnCompletionListener(new OnCompletionListener() {
             @Override
             public void onCompletion() {
                 easyVideoControlsMobile.showRestartView();
             }
         });
-
         videoView.setOnErrorListener(new OnErrorListener() {
             @Override
             public boolean onError(Exception e) {
                 easyVideoControlsMobile.showErrorView();
-//                easyVideoControlsMobile.finishLoading();
                 return true;
             }
         });
-        videoView.setReleaseOnDetachFromWindow(true);
-        videoView.setKeepScreenOn(true);
         videoView.setOnPreparedListener(new OnPreparedListener() {
             @Override
             public void onPrepared() {
@@ -161,6 +139,7 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
             }
         });
         videoView.setPreviewImage(R.mipmap.ic_launcher);
+        playlistManager.play(0, true);
     }
 
     /**
@@ -176,8 +155,7 @@ public class VideoPlayerActivity extends Activity implements PlaylistListener<Me
             mediaItems.add(mediaItem);
         }
 
-        playlistManager.setAllowedMediaType(BasePlaylistManager.VIDEO);
-//        playlistManager.setAllowedMediaType(BasePlaylistManager.AUDIO | BasePlaylistManager.VIDEO);
+        playlistManager.setAllowedMediaType(BasePlaylistManager.AUDIO | BasePlaylistManager.VIDEO);
         playlistManager.setParameters(mediaItems, selectedIndex);
         playlistManager.setId(PLAYLIST_ID);
     }

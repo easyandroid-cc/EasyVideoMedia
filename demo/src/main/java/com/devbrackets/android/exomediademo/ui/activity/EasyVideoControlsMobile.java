@@ -54,6 +54,7 @@ public class EasyVideoControlsMobile extends VideoControlsMobile {
             @Override
             public void onStartClick() {
                 onPlayPauseClick();
+                hideAllView();
             }
 
             @Override
